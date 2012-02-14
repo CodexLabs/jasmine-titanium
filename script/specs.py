@@ -14,6 +14,8 @@ def resource_dir():
     return re.sub("%(sep)sResources%(sep)s.+" % locals(), "%(sep)sResources" % locals(), script_dir)
 
 def sdk_version():
+    # Titanium Studio で動かなかったので...
+    '''
     setting_path = os.path.join(project_dir(), ".settings", "com.appcelerator.titanium.mobile.prefs")
     version = ''
     version_constant_name = "MOBILE_PROJECT_SDK_VERSION"
@@ -22,6 +24,8 @@ def sdk_version():
             version = re.sub(version_constant_name + "=", "", line.strip())
         
     return version
+    '''
+    return "1.8.1"
 
 def options_temporary_path():
     return os.path.join(resource_dir(), 'temp_runner_options.js')
