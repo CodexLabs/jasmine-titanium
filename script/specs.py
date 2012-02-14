@@ -3,6 +3,7 @@
 
 import os, sys, re, shutil, time, subprocess
 from optparse import OptionParser
+from xml.etree.ElementTree import ElementTree
 
 def project_dir():
     return resource_dir().replace("/Resources", "")
@@ -14,18 +15,10 @@ def resource_dir():
     return re.sub("%(sep)sResources%(sep)s.+" % locals(), "%(sep)sResources" % locals(), script_dir)
 
 def sdk_version():
-    # Titanium Studio で動かなかったので...
-    '''
-    setting_path = os.path.join(project_dir(), ".settings", "com.appcelerator.titanium.mobile.prefs")
-    version = ''
-    version_constant_name = "MOBILE_PROJECT_SDK_VERSION"
-    for line in open(setting_path, 'r'):
-        if line.startswith(version_constant_name):
-            version = re.sub(version_constant_name + "=", "", line.strip())
-        
-    return version
-    '''
-    return "1.8.1"
+    tixml_path = os.path.join(project_dir(), "tiapp.xml")
+    xml = ElementTree(file=open(tixml_path))
+    elm = xml.find("sdk-version")
+    return elm.text
 
 def options_temporary_path():
     return os.path.join(resource_dir(), 'temp_runner_options.js')
