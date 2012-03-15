@@ -3,7 +3,7 @@ Ti.App.env = 'test'
 Ti.include("/vendor/jasmine-titanium/config/runner-config.js")
 Ti.include("/temp_runner_options.js")
 
-JasmineTitaniumApp = {
+@JasmineTitaniumApp = {
     classname: runner_options?["classname"]
     verbose: runner_options?["verbose"]
     lib_dir: runner_config.lib_dir + "/"
@@ -25,4 +25,4 @@ JasmineTitaniumApp = {
             else
                 @loadSpecs(path + spec + "/") #if !spec.match(/^\..+/)
 }
-JasmineTitaniumApp.loadSpecs("")
+@JasmineTitaniumApp.loadSpecs("")
